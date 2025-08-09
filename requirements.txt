@@ -1,10 +1,10 @@
-pandas 
+pandas
 mlflow
 notebook
 numpy
 scikit-learn
 matplotlib
-python-box
+python-box==6.1.0
 pyYAML
 tqdm
 ensure
