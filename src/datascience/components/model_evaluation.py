@@ -12,9 +12,12 @@ from src.datascience.constants import *
 from src.datascience.utils.common import read_yaml, create_directories,save_json
 
 import os
-os.environ["MLFLOW_TRACKING_URI"]="https://dagshub.com/abhiramsr173/DataScienceProject.mlflow"
-os.environ["MLFLOW_TRACKING_USERNAME"]="abhiramsr173"
-os.environ["MLFLOW_TRACKING_PASSWORD"]="e33892f529a47ac6576159fd19a6b0a7635b8a39"
+from dotenv import load_dotenv
+load_dotenv()
+
+os.environ["MLFLOW_TRACKING_URI"]= os.getenv("MLFLOW_TRACKING_URI")
+os.environ["MLFLOW_TRACKING_USERNAME"]= os.getenv("MLFLOW_TRACKING_USERNAME")
+os.environ["MLFLOW_TRACKING_PASSWORD"]= os.getenv("MLFLOW_TRACKING_PASSWORD")
 
 class ModelEvaluation:
     def __init__(self, config: ModelEvaluationConfig):
@@ -53,7 +56,5 @@ class ModelEvaluation:
             mlflow.log_metric("r2", r2)
             mlflow.log_metric("mae", mae)
 
-            if tracking_url_type_store != "file":
-                mlflow.sklearn.log_model(model, "model", registered_model_name="ElasticnetModel")
-            else:
-                mlflow.sklearn.log_model(model, "model")
+            joblib.dump(model, "model.pkl")
+            mlflow.log_artifact("model.pkl", artifact_path="model")
