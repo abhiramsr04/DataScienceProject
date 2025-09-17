@@ -7,7 +7,6 @@ logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
 project_name="datascience"
 
 list_of_files=[
-    ".gthub/workflows/.gitkeep",
     f"src/{project_name}/__init__.py",
     f"src/{project_name}/components/__init__.py",
     f"src/{project_name}/utils/__init__.py",
@@ -22,12 +21,9 @@ list_of_files=[
     "params.yaml",
     "schema.yaml",
     "main.py",
-    "Dockerfile",
-    "setup.py",
     "research/research.ipynb",
     "templates/index.html",
     "app.py"
-
 ]
 
 
@@ -41,7 +37,6 @@ for filepath in list_of_files:
     
     if (not os.path.exists(filepath)) or (os.path.getsize(filepath) == 0):
         with open(filepath,"w") as f:
-
             pass
             logging.info(f"Creating empty file: {filepath}")
 
